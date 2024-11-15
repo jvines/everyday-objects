@@ -1,0 +1,62 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/code/app
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+      args:
+        PUID: 1000
+        PGID: 1000
+    ports:
+      - 5050:80
+    depends_on:
+      - postgres
+    environment:
+      POSTGRESQL_URI: postgresql://postgres:pepe1234@postgres/everyday_objects
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    environment:
+      TZ: America/Santiago
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pepe1234
+      POSTGRES_DB: everyday_objects
+    command:
+      - postgres
+      - -c
+      - max_connections=150
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    user: 5050:5050
+    ports:
+      - 7654:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: pepe1234
+    volumes:
+      - ./config:/var/liv/pgadmin
+    depends_on:
+      - postgres
+  frontend:
+    volumes:
+      - ./everydayObjects:/app
+      - /app/node_modules
+    build:
+      context: ./everydayObjects
+      dockerfile: ./Dockerfile
+    ports:
+      - 5173:5173
+    depends_on:
+      - backend
