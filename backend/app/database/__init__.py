@@ -4,7 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from psycopg2 import OperationalError
 
-SQLALCHEMY_DATABASE_URL = os.environ.get('POSTGRESQL_URI')
+# SQLALCHEMY_DATABASE_URL = os.environ.get('POSTGRESQL_URI')
+SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:pepe1234@postgres/everyday_objects'
 
 try:
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
