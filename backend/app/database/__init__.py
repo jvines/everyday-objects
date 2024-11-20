@@ -11,7 +11,7 @@ try:
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
 except OperationalError:
     import time
-    time.sleep(5)
+    time.sleep(10)
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 LocalSession = sessionmaker(autocommit=False, autoflush=False, bind=engine)

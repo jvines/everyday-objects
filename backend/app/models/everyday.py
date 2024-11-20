@@ -30,9 +30,9 @@ class Material(BaseModel):
     
     class Config:
         from_attributes = True
-
+        
 
 class ItemMaterial(BaseModel):
     
-    item: str
-    material: list[str]
+    body_materials: list[str]
+    detail_materials: list[str]
