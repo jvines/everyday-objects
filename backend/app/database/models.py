@@ -7,6 +7,7 @@ class Item(Base):
     
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     item = Column(String, nullable=False)
+    image = Column(String, nullable=False)
 
 
 class Material(Base):
