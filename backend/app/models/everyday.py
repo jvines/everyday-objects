@@ -36,3 +36,4 @@ class ItemMaterial(BaseModel):
     
     body_materials: list[str]
     detail_materials: list[str]
+    material_ids: list[int]

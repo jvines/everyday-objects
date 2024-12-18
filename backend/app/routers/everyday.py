@@ -10,7 +10,8 @@ router = APIRouter(
 )
 
 @router.get('/object/{object_id}')
-def get_object_materials(object_id: int, db: Session = Depends(get_db)):
+def get_object_materials(object_id: int, db: Session = Depends(get_db)) \
+        -> ItemMaterial:
     item_materials = (
         db
         .query(models.ItemMaterial)
@@ -18,6 +19,7 @@ def get_object_materials(object_id: int, db: Session = Depends(get_db)):
     ).all()
     body_materials = []
     detail_materials = []
+    material_ids = []
     for item_material in item_materials:
         material = (
             db
@@ -31,8 +33,14 @@ def get_object_materials(object_id: int, db: Session = Depends(get_db)):
             
         else:
             detail_materials.append(material)
+            
+        material_ids.append(item_material.material_id)
     
-    return ItemMaterial(body_materials=body_materials, detail_materials=detail_materials)
+    return ItemMaterial(
+        body_materials=body_materials,
+        detail_materials=detail_materials,
+        material_ids=material_ids,
+    )
 
 
 @router.get('/object')
