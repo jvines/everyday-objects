@@ -37,3 +37,17 @@ class ItemMaterial(BaseModel):
     body_materials: list[str]
     detail_materials: list[str]
     material_ids: list[int]
+
+
+class MaterialIdList(BaseModel):
+    """Class that adds a new item"""
+    material_ids: list[int]
+
+
+class EnvironmentalImpact(BaseModel):
+    
+    total_co2: float
+    total_diesel: float
+    total_carbon_footprint: float
+    total_hydric_footprint: float
+    total_diesel_consumption: float

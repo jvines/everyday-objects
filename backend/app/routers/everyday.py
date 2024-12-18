@@ -9,6 +9,33 @@ router = APIRouter(
     prefix='/everyday'
 )
 
+
+@router.post('/impact')
+def calculate_environmental_impact(material_list: MaterialIdList,
+                      db: Session = Depends(get_db)) -> EnvironmentalImpact:
+    total_co2, total_diesel = 0, 0
+    total_carbon_footprint, total_hydric_footprint = 0, 0
+    total_diesel_consumption = 0
+    for material_id in material_list.material_ids:
+        material = (
+            db
+            .query(models.Material)
+            .filter(models.Material.id == material_id)
+        ).first()
+        total_co2 += material.co2_kg
+        total_diesel += material.diesel_kg
+        total_carbon_footprint += material.carbon_footprint
+        total_hydric_footprint += material.hydric_footprint
+        total_diesel_consumption += material.diesel_consumption
+    return EnvironmentalImpact(
+        total_co2=total_co2,
+        total_diesel=total_diesel,
+        total_carbon_footprint=total_carbon_footprint,
+        total_hydric_footprint=total_hydric_footprint,
+        total_diesel_consumption=total_diesel_consumption
+    )
+        
+
 @router.get('/object/{object_id}')
 def get_object_materials(object_id: int, db: Session = Depends(get_db)) \
         -> ItemMaterial:
