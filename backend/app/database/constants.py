@@ -5,7 +5,7 @@ ITEMS = [
  {"item": "Cepillo de dientes", "image": "/src/utils/assets/images/cepillo_de_dientes.png"},
  {"item": "Cuaderno", "image": "/src/utils/assets/images/libreta.png"},
  {"item": "Hervidor", "image": "/src/utils/assets/images/hervidor.png"},
- {"item": "Lamparas", "image": "/src/utils/assets/images/lampara.jpg"},
+ {"item": "Lamparas", "image": "/src/utils/assets/images/lampara.png"},
  {"item": "Lapiz", "image": "/src/utils/assets/images/lapiz.png"},
  {"item": "Lentes", "image": "/src/utils/assets/images/lentes.png"},
  {"item": "Microondas", "image": "/src/utils/assets/images/microondas.png"},
