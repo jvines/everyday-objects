@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .database import engine, Base
 from .database.utils import lifespan
 from .routers import everyday
 
@@ -14,7 +13,6 @@ origins = [
 
 
 def create_app():
-    Base.metadata.create_all(bind=engine)
     app = FastAPI(lifespan=lifespan)
     app.add_middleware(
         CORSMiddleware,
