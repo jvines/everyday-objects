@@ -1,7 +1,7 @@
 ITEMS = [
  {"item": "Audifonos", "image": "/src/utils/assets/images/audifonos.png"},
  {"item": "Bicicleta", "image": "/src/utils/assets/images/bici.png"},
- {"item": "Botella termica", "image": "/src/utils/assets/images/botella_terminca.png"},
+ {"item": "Botella termica", "image": "/src/utils/assets/images/botella_termica.png"},
  {"item": "Cepillo de dientes", "image": "/src/utils/assets/images/cepillo_de_dientes.png"},
  {"item": "Cuaderno", "image": "/src/utils/assets/images/libreta.png"},
  {"item": "Hervidor", "image": "/src/utils/assets/images/hervidor.png"},
