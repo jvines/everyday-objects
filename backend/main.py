@@ -2,6 +2,7 @@ from app import create_app
 
 app = create_app()
 
+
 @app.get('/')
 async def root():
     return {'message': 'CHUPALO PEPE'}

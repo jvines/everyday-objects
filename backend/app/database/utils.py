@@ -3,12 +3,15 @@ from contextlib import asynccontextmanager
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from .models import Item, Material, ItemMaterial
-from . import engine
+from . import engine, wait_for_db_connection
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    if not wait_for_db_connection():
+        raise HTTPException(status_code=503, detail="Database not available")
     with Session(engine) as session:
         items = session.scalars(select(Item)).all()
         materials = session.scalars(select(Material)).all()
